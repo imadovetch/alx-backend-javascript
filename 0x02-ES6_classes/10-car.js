@@ -1,19 +1,40 @@
-const cloneCarSymbol = Symbol("cloneCar");
-
-class Car {
+export default class Car {
   constructor(brand, motor, color) {
-    this._brand = brand;
-    this._motor = motor;
-    this._color = color;
+    this.brand = brand;
+    this.motor = motor;
+    this.color = color;
   }
 
-  [cloneCarSymbol]() {
-    return new Car(this._brand, this._motor, this._color);
+  get brand() {
+    return this._brand;
+  }
+
+  set brand(val) {
+    this._brand = val;
+  }
+
+  get motor() {
+    return this._motor;
+  }
+
+  set motor(val) {
+    this._motor = val;
+  }
+
+  get color() {
+    return this._color;
+  }
+
+  set color(val) {
+    this._color = val;
+  }
+
+  static get [Symbol.undefined]() {
+    return this;
   }
 
   cloneCar() {
-    return this[cloneCarSymbol]();
+    const Undefined = this.constructor[Symbol.undefined];
+    return new Undefined();
   }
 }
-
-export default Car;
